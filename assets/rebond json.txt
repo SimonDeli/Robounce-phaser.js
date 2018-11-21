@@ -1,0 +1,21 @@
+  "RebondHautDroite": [
+    {
+      "shape": [ 0,0, 239,0 , 239,239 ]
+		
+    }
+  ],
+  "RebondBasGauche": [
+    {
+      "shape": [ 0,0, 239,239, 0,239 ]
+    }
+  ],
+  "RebondHautGauche": [
+    {
+      "shape": [ 0,239, 0,0, 239,0 ]
+    }
+  ],
+  "RebondBasDroite": [
+    {
+      "shape": [ 0,239, 239,0, 239,239 ]
+    }
+  ],

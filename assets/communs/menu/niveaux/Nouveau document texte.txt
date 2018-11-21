@@ -1,0 +1,29 @@
+Niveau 1 -> 5 tirs, 0 etoiles :
+	2 -> 3 etoiles
+	3 -> 2 etoiles
+	4 -> 1 etoiles
+
+Niveau 2 -> 6 tirs, 2 etoiles :
+	3 -> 3 etoiles
+	4 -> 2 etoiles
+	6 -> 1 etoiles
+
+Niveau 3 -> 8 tirs, 5 etoiles :
+	5 -> 3 etoiles
+	7 -> 2 etoiles
+	8 -> 1 etoiles
+
+Niveau 4 -> 12 tirs, 7 etoiles :
+	7 -> 3 etoiles
+	8 -> 2 etoiles
+	10 -> 1 etoiles
+
+Niveau 5 -> 10 tirs, 11 etoiles :
+	6 -> 3 etoiles
+	8 -> 2 etoiles
+	9 -> 3 etoiles 
+
+Niveau 6 -> 12 tirs, 13 etoiles :
+	7 -> 3 etoiles
+	9 -> 2 etoiles
+	11 -> 1 etoile

@@ -1,0 +1,32 @@
+impact
+	plateforme normal	D
+	plateforme rebond	D
+	laser
+	perso/plateforme
+
+tir				D
+
+destruction proj		D
+
+saut				D
+
+klaxon				D
+
+ouverture porte			D
+fermeture porte			D
+plateforme qui tourne		D
+
+personnageRoule
+
+niveau gagné			
+niveau perdu
+
+menu
+	clique			D
+
+ecran win 
+	etoiles			D
+
+ecran niveau
+	erreur (clique sur cadenas)
+	

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<title>Robounce le jeu</title>
+<meta charset="utf-8"/>
+<meta name="description" content="Jeu créé au cours de ma deuxième année de DUT MMI grâce au moteur de jeu javascript 'Phaser'"/>
+<meta name="author" content="Simon DELINEAU"/>
+<meta http-equiv="content-language" content="fr" />
+<meta property="og:title" content="Robounce Le Jeu" />
+<meta property="og:url" content="https://simon-delineau.com/robounce_le_jeu/" />
+<meta property="og:image" content="/assets/vignette.png" />
+<meta property="og:image" content="/assets/vignette.jpg" />
+<meta property="og:image" content="https://simon-delineau.com/robounce_le_jeu/assets/vignette.png" />
+<meta property="og:image" content="https://simon-delineau.com/robounce_le_jeu/assets/vignette.jpg" />
+<meta property="og:image" content="http://simon-delineau.com/robounce_le_jeu/assets/vignette.png" />
+<meta property="og:image" content="http://simon-delineau.com/robounce_le_jeu/assets/vignette.jpg" />
+
+	<script src="lib/phaser.js"></script>
+	<script src="lib/phaser-input.min.js"></script>
+	<script src="lib/jquery-3.2.0.min.js"></script>
+	<script src="js/VariableGlobales.js"></script>
+	<script src="js/EcranChargement.js"></script>
+	<script src="js/preload.js"></script>
+
+	<script src="js/FonctionsCollisions.js"></script>
+	<script src="js/FonctionsAutre.js"></script>
+	<script src="js/PauseBoutton.js"></script>
+	<script src="js/Player.js"></script>
+	<script src="js/Plateforme.js"></script>
+	<script src="js/Bumper.js"></script>
+	<script src="js/Projectiles.js"></script>
+	<script src="js/Bouton.js"></script>
+	<script src="js/Porte.js"></script>
+	<script src="js/Lumiere.js"></script>
+	<script src="js/MenuPrincipal.js"></script>
+	<script src="js/MenuNiveaux.js"></script>
+	<script src="js/MenuCommandes.js"></script>
+	<script src="js/EcranWin.js"></script>
+	<script src="js/Tuto.js"></script>
+	<script src="js/Level1.js"></script>
+	<script src="js/Level2.js"></script>
+	<script src="js/Level3.js"></script>
+	<script src="js/Level4.js"></script>
+	<script src="js/Level5.js"></script>
+	<script src="js/Level6.js"></script>
+</head>
+
+<body style="overflow:hidden">
+	<script>
+
+		var game = new Phaser.Game(1920, 1080, Phaser.AUTO);
+
+		game.state.add("EcranChargement", MyGame.EcranChargement);
+		game.state.add("EcranWin", MyGame.EcranWin);
+		game.state.add("menuPrincipal", MyGame.StateMenuP);
+		game.state.add("menuNiveaux", MyGame.StateMenuNiveaux);
+		game.state.add("menuCommandes", MyGame.StateMenuCommandes);
+		game.state.add("1", MyGame.StateTuto);
+		game.state.add("2", MyGame.StateLevel1);
+		game.state.add("3", MyGame.StateLevel2);
+		game.state.add("4", MyGame.StateLevel3);
+		game.state.add("5", MyGame.StateLevel4);
+		game.state.add("6", MyGame.StateLevel5);
+		game.state.add("7", MyGame.StateLevel6);
+		//game.desiredFps = 1;
+		game.state.start("EcranChargement");
+	</script>
+</body>
+</html>

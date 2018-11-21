@@ -1,0 +1,36 @@
+{
+  "RebondHautDroite": [
+    {
+      "shape": [ 0,0, 239,0 , 239,239 ]
+		
+    }
+  ],
+  "RebondBasGauche": [
+    {
+      "shape": [ 0,0, 239,239, 0,239 ]
+    }
+  ],
+  "RebondHautGauche": [
+    {
+      "shape": [ 0,239, 0,0, 239,0 ]
+    }
+  ],
+  "RebondBasDroite": [
+    {
+      "shape": [ 0,239, 239,0, 239,239 ]
+    }
+  ],
+"plateformeRebond45Bas": [
+        {
+            "shape": [ 170,0, 339,170, 0,170 ]
+        }
+ 	],
+"plateforme3": [
+    {
+      "shape": [0,0,452,0,452,187,303,187]
+    },
+    {
+      "shape": [0,0,303,187,303,290,0,290]
+    }
+  ]
+}
