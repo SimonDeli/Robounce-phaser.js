@@ -132,10 +132,10 @@ FonctionsService.prototype.tirProjectile = function(velocX, velocY){
 		projectile.body.setCollisionGroup(projectileCollisionGroup);
 
 			//COLLIDES
-		projectile.body.collides(plateformeRebondCollisionGroup, impactRebond, this);
-		projectile.body.collides(plateformeCollisionGroup, impactProjPlateforme, this);
-		projectile.body.collides(boutonCollisionGroup, impactProjBouton, this);
-		projectile.body.collides(porteCollisionGroup, impactProjPorte, this);
+		projectile.body.collides(plateformeRebondCollisionGroup, collisionsService.impactRebond, this);
+		projectile.body.collides(plateformeCollisionGroup, collisionsService.impactProjPlateforme, this);
+		projectile.body.collides(boutonCollisionGroup, collisionsService.impactProjBouton, this);
+		projectile.body.collides(porteCollisionGroup, collisionsService.impactProjPorte, this);
 
 		for(var i = 0 ; i < plateformeGrp.length ; i++){
 			plateformeGrp.children[i].body.collides(projectileCollisionGroup);

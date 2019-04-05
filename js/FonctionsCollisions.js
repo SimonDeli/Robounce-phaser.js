@@ -1,17 +1,16 @@
-function impactPersoPlateforme(personnage, plateforme){
-	//console.log("Perso_Plateforme");
+var CollisionsService = function(){}
+
+CollisionsService.prototype.impactPersoPlateforme = function(personnage, plateforme){
 	personnage.sprite.canJump = true;
 	personnage.sprite.isJumping = false;
 }// <<impactPersoPlateforme
 
-function impactPersoBumper(personnage, bumper){
-	//console.log("Perso_Bumper");
+CollisionsService.prototype.impactPersoBumper = function(personnage, bumper){
 	personnage.sprite.saut(2000);
 	bumper.sprite.bumperSaut();
 }// <<impactPersoBumper1
 
-function impactProjPlateforme(projectile, plateforme){
-	console.log("<b>impactProjPlateforme</b>");
+CollisionsService.prototype.impactProjPlateforme = function(projectile, plateforme){
 
 	sonImpactPlateforme.play();
 
@@ -20,8 +19,7 @@ function impactProjPlateforme(projectile, plateforme){
 
 }// <<impactProjPlateforme
 
-function impactProjBouton(projectile, bouton){
-	console.log("<b>impactProjBouton</b>");
+CollisionsService.prototype.impactProjBouton = function(projectile, bouton){
 	projectile.sprite.disparition();
 	projectileLance = false;
 
@@ -41,21 +39,15 @@ function impactProjBouton(projectile, bouton){
 	}
 }
 // <<impactProjBouton
-function impactProjPorte(projectile, porte){
+CollisionsService.prototype.impactProjPorte = function(projectile, porte){
 	sonImpactLaser.play();
 	projectile.sprite.disparition();
 		projectileLance = false;
-	if(porte.sprite.porteOuverte === false)
-	{
-		console.log("porteOuverte");
-
-	}
 }
 // <<impactProjPorte
-function impactPersoSortie(personnage, sortie){
+CollisionsService.prototype.impactPersoSortie = function(personnage, sortie){
 	if(checkSortie)
 		{
-		console.log("gagne");
 		son2.play();
 		var current = parseInt(game.state.current);
 		var state = (current+1).toString();
@@ -77,7 +69,6 @@ function impactPersoSortie(personnage, sortie){
 				console.log(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles+" DEUX ETOILE CHECK");*/
 				nbrEtoiles += 3;
 			}
-			console.log("3 ETOILES");
 			liste_niveau[sortie.sprite.numeroNiveau-1] = 3;
 			checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles = true;
 			etoileGagne = 3;
@@ -98,9 +89,6 @@ function impactPersoSortie(personnage, sortie){
 			{
 				nbrEtoiles += 2;
 			}
-
-
-			console.log("2 ETOILES");
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 2) //si Il a deja gagné 2 étoiles ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 2;
 
@@ -121,9 +109,6 @@ function impactPersoSortie(personnage, sortie){
 				{
 				nbrEtoiles += 1;
 				}
-
-
-			console.log("1 ETOILE");
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 1)// si il a déjà gagné 1 etoile ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 1;
 
@@ -153,8 +138,10 @@ function impactPersoSortie(personnage, sortie){
 	}
 }// <<impactPersoSortie
 
-function impactRebond(body1, body2){
+CollisionsService.prototype.impactRebond = function(body1, body2){
 	sonImpactPlateformeRebond.play();
 	body1.sprite.tweenScale();
 
 }
+
+var collisionsService = new CollisionsService();

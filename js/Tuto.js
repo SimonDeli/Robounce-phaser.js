@@ -187,12 +187,12 @@ MyGame.StateTuto.prototype = {
 				//COLLIDES (certains sont dans la fonction "tirProjectiles --> "FonctionsAutre.js")
 					//Plateforme -> Personnage
 
-			personnage.body.collides(plateformeCollisionGroup, impactPersoPlateforme, this);
+			personnage.body.collides(plateformeCollisionGroup, collisionsService.impactPersoPlateforme, this);
 			for(var i = 0 ; i < plateformeGrp.length ; i++){
 				plateformeGrp.children[i].body.collides(personnageCollisionGroup);
 			}
 					//Personnage -> Bumper
-			personnage.body.collides(bumperCollisionGroup, impactPersoBumper, this);
+			personnage.body.collides(bumperCollisionGroup, collisionsService.impactPersoBumper, this);
 			for(var i = 0 ; i < bumperGrp.length ; i++){
 				bumperGrp.children[i].body.collides(personnageCollisionGroup);
 			}
@@ -204,7 +204,7 @@ MyGame.StateTuto.prototype = {
 
 					//Personnage -> Sortie
 			levelComplete.body.collides(personnageCollisionGroup);
-			personnage.body.collides(sortieCollisionGroup, impactPersoSortie, this);
+			personnage.body.collides(sortieCollisionGroup, collisionsService.impactPersoSortie, this);
 
 				//CIBLE (curseur)
 			cible = game.add.sprite(-10, -10, "cible");
