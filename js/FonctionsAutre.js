@@ -1,5 +1,6 @@
 var FonctionsService = function(){}
 
+FonctionsService.prototype.constructor=FonctionsService;
 FonctionsService.prototype.creationBordure = function(){
 	bordHorizontalB = new Plateforme(game, game.world.width/2, game.world.height, "bordH", debug);
 		bordHorizontalB.body.y = game.world.height + bordHorizontalB.height/2;
@@ -19,7 +20,7 @@ FonctionsService.prototype.creationBordure = function(){
 	bordHorizontalH.body.setRectangleFromSprite(bordHorizontalH);
 	bordVerticalG.body.setRectangleFromSprite(bordVerticalG);
 	bordVerticalD.body.setRectangleFromSprite(bordVerticalD);
-}
+},
 
 FonctionsService.prototype.styleSheet = function(frameDebut, frameFin, objet, nom){ //facilite la creation et l'affectation des animations
 	var tableau = new Array();
@@ -28,7 +29,7 @@ FonctionsService.prototype.styleSheet = function(frameDebut, frameFin, objet, no
 	}
 	var anim = objet.animations.add(nom, tableau);
 	return anim;
-}// <<styleSheet
+},// <<styleSheet
 
 FonctionsService.prototype.creationCollisionGrp = function(){
 	plateformeCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -39,7 +40,7 @@ FonctionsService.prototype.creationCollisionGrp = function(){
 	porteCollisionGroup = game.physics.p2.createCollisionGroup();
 	sortieCollisionGroup = game.physics.p2.createCollisionGroup();
 	projectileCollisionGroup = game.physics.p2.createCollisionGroup();
-}
+},
 
 FonctionsService.prototype.creationGrp = function(){
 	porteGrp = game.add.group();
@@ -47,7 +48,7 @@ FonctionsService.prototype.creationGrp = function(){
 	bumperGrp = game.add.group();
 	plateformeGrp = game.add.group();
 	rebondGrp = game.add.group();
-}
+},
 FonctionsService.prototype.creationSons = function (){
 	bruitageGrp = new Array();
 	musiqueGrp = new Array();
@@ -97,7 +98,7 @@ FonctionsService.prototype.creationSons = function (){
 	musiqueGrp.push(musiqueNiveau);
 
 	console.log("hey hey hey");
-}
+},
 
 FonctionsService.prototype.ouverturePorte = function(porte, bouton, lumiere, distance){
 	if(porte.porteOuverte === false){
@@ -115,12 +116,12 @@ FonctionsService.prototype.ouverturePorte = function(porte, bouton, lumiere, dis
 		sonFermeturePorte.play();
 
 	}
-}
+},
 
 FonctionsService.prototype.rotationPlateformeRebond = function(plateforme){
 	plateforme.rotationFunction();
 
-}
+},
 
 FonctionsService.prototype.tirProjectile = function(velocX, velocY){
 	//if (!(projectileLance)){ //s'il n'y a pas de projectiles en cours
@@ -173,17 +174,17 @@ FonctionsService.prototype.tirProjectile = function(velocX, velocY){
 
 		}
 		console.log(tableauContMat[0]);
-}
+},
 FonctionsService.prototype.pauseFunction = function(){
+	var _this = this;
 	if(isPaused === false)
 	{
 		filtreMenu = game.add.sprite(0, 0, "filtreMenu");
+		pauseButton1 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionMenuP, this);
+		pauseButton2 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionMenuNiveau, this);
+		pauseButton3 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionReprendre, this);
+		pauseButton4 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionRecommencer, this);
 
-		/*pauseButton1 = game.add.button(game.world.width/2, 0, "buttonMenu", bouttonMenuFunction1, this, 1, 0, 2);*/
-		pauseButton1 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionMenuP);
-		pauseButton2 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionMenuNiveau);
-		pauseButton3 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionReprendre);
-		pauseButton4 = new PauseBoutton(game, game.world.width/2, 0, "buttonMenu", this.bouttonMenuFonctionRecommencer);
 
 
 		textButton1 = game.add.text(game.world.width/2, 0,  'Menu principal', { font: '50px Calibri', fill: '#000' });
@@ -230,7 +231,7 @@ FonctionsService.prototype.pauseFunction = function(){
 		isPaused = true;
 
 	}
-		}
+},
 FonctionsService.prototype.animationDestructionProj = function(projectile){
 	var projDetruit = game.add.sprite(projectile.x, projectile.y, "projDetruit");
 	projDetruit.anchor.setTo(0.5);
@@ -239,27 +240,25 @@ FonctionsService.prototype.animationDestructionProj = function(projectile){
 	var tweenDetruitAlpha = game.add.tween(projDetruit).to({alpha:0}, 100, Phaser.Easing.Linear.None);
 	tweenDetruitAlpha.start();
 	tweenDetruitScale.start();
-}
+},
 FonctionsService.prototype.reset = function(){
 	game.paused = false;
 	isPaused = false;
 	projectileLance = false;
 	personnage.destroy();
-}
+},
 
 FonctionsService.prototype.bouttonMenuFonctionMenuP = function(){
-	this.reset();
-
+	this.context.reset();
 	son2.play();
 	game.state.start("menuPrincipal");
 	console.log("salut 1")
-}
+},
 FonctionsService.prototype.bouttonMenuFonctionMenuNiveau = function(){
-	this.reset();
+	this.context.reset();
 	son2.play();
 	game.state.start("menuNiveaux");
-	console.log("salut 2")
-}
+},
 FonctionsService.prototype.bouttonMenuFonctionReprendre = function(){
 	for(var i = 0 ; i<bouttonPauseGrp.length ; i ++){
 			bouttonPauseGrp.children[i].kill();
@@ -269,12 +268,12 @@ FonctionsService.prototype.bouttonMenuFonctionReprendre = function(){
 		filtreMenu.destroy();
 		game.paused = false;
 		isPaused = false;
-}
+},
 FonctionsService.prototype.bouttonMenuFonctionRecommencer = function(){
-	this.reset();
+	this.context.reset();
 	son2.play();
 	game.state.restart();
-}
+},
 FonctionsService.prototype.deplacementPlateforme = function(plateforme, bouton){
 	if(plateforme.ouverte === false)
 		{
@@ -290,18 +289,18 @@ FonctionsService.prototype.deplacementPlateforme = function(plateforme, bouton){
 			plateforme.ouverte = false;
 			bouton.btnAppuye(bouton.deplacement);
 	}
-}
+},
 FonctionsService.prototype.gamePerdu = function(){
 	if(personnage.perdu){
 		lose.play();
 		var perdu = game.add.sprite(game.world.width/2, game.world.height/2, "ecranPerdu");
 		perdu.anchor.set(0.5);
 		perdu.alpha = 0;
-		var bouton = new PauseBoutton(game, game.world.width/2, game.world.height/2, "buttonMenu", this.bouttonMenuFonctionRecommencer);
+		var bouton = new PauseBoutton(game, game.world.width/2, game.world.height/2, "buttonMenu", this.bouttonMenuFonctionRecommencer, this);
 		bouton.anchor.set(0.5);
 		bouton.alpha = 0;
 
-		var bouton2 = new PauseBoutton(game, game.world.width/2, game.world.height/2 + 200, "buttonMenu", this.bouttonMenuFonctionMenuNiveau);
+		var bouton2 = new PauseBoutton(game, game.world.width/2, game.world.height/2 + 200, "buttonMenu", this.bouttonMenuFonctionMenuNiveau, this);
 		bouton2.anchor.set(0.5);
 		bouton2.alpha = 0;
 
@@ -334,7 +333,7 @@ FonctionsService.prototype.gamePerdu = function(){
 		//game.paused = true;
 
 	}
-}
+},
 FonctionsService.prototype.affichageEtoile = function(){
 	etoiles = game.add.sprite(game.world.width - 50, 30, "etoiles_Niveau");
 	etoiles.anchor.set(0.5);
@@ -342,7 +341,7 @@ FonctionsService.prototype.affichageEtoile = function(){
 
 	texteEtoile = game.add.text(etoiles.x - 50, etoiles.y, nbrEtoiles, {font: "40px Roboto Light", fill: "#000"});
 	texteEtoile.anchor.set(0.5);
-}
+},
 
 FonctionsService.prototype.iconeInformation = function(){
 	icone = game.add.sprite(50, game.world.height - 50, "iconeInformation");
@@ -381,7 +380,7 @@ FonctionsService.prototype.iconeInformation = function(){
 		tweenTexte.start();
 		tweenRectangle.start();
 	}, this);
-}
+},
 
 FonctionsService.prototype.afficherExplication = function(){
 	if(this.pauseDebut != null){
@@ -414,7 +413,7 @@ FonctionsService.prototype.afficherExplication = function(){
 			}
 	}
 
-}
+},
 
 FonctionsService.prototype.verifMusiqueEnCours = function(){
 	if(musiqueMenu.isPlaying)
@@ -424,6 +423,6 @@ FonctionsService.prototype.verifMusiqueEnCours = function(){
 	if(musiqueNiveau.isPlaying == false){
 		musiqueNiveau.play();
 	}
-}
+};
 
 var fonctionsService = new FonctionsService();

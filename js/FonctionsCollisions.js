@@ -46,29 +46,19 @@ CollisionsService.prototype.impactProjPorte = function(projectile, porte){
 }
 // <<impactProjPorte
 CollisionsService.prototype.impactPersoSortie = function(personnage, sortie){
-	if(checkSortie)
-		{
+	if(checkSortie){
 		son2.play();
 		var current = parseInt(game.state.current);
 		var state = (current+1).toString();
 
 
-		if(personnage.sprite.nbrTir >= sortie.sprite.etoiles_3 && checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles == false)
-		{
+		if(personnage.sprite.nbrTir >= sortie.sprite.etoiles_3 && checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles == false){
 			if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles == true)
-			{
 				nbrEtoiles += 1;
-			}
 			else if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile == true)
-			{
 				nbrEtoiles += 2;
-			}
 			else
-			{
-				/*console.log(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile+" UNE ETOILE CHECK");
-				console.log(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles+" DEUX ETOILE CHECK");*/
 				nbrEtoiles += 3;
-			}
 			liste_niveau[sortie.sprite.numeroNiveau-1] = 3;
 			checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles = true;
 			etoileGagne = 3;
@@ -77,18 +67,11 @@ CollisionsService.prototype.impactPersoSortie = function(personnage, sortie){
 		else if(personnage.sprite.nbrTir < sortie.sprite.etoiles_3 && personnage.sprite.nbrTir > sortie.sprite.etoiles_1 && checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles == false)
 		{
 			if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles == true)
-			{
 				nbrEtoiles += 0;
-			}
-
 			else if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile == true)
-			{
 				nbrEtoiles += 1;
-			}
 			else
-			{
 				nbrEtoiles += 2;
-			}
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 2) //si Il a deja gagné 2 étoiles ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 2;
 
@@ -97,18 +80,11 @@ CollisionsService.prototype.impactPersoSortie = function(personnage, sortie){
 		}
 		else  if(personnage.sprite.nbrTir <= sortie.sprite.etoiles_1 && checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile == false){
 			if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].trois_etoiles == true)
-				{
 					nbrEtoiles += 0;
-				}
-
 			else if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles == true)
-				{
 					nbrEtoiles += 0;
-				}
 			else
-				{
 				nbrEtoiles += 1;
-				}
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 1)// si il a déjà gagné 1 etoile ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 1;
 
@@ -116,24 +92,14 @@ CollisionsService.prototype.impactPersoSortie = function(personnage, sortie){
 			etoileGagne = 1;
 		}
 
-
-
-		if(sortie.sprite.needEtoiles != null) //si on est pas au tuto
-		{
-			/*if(sortie.sprite.needEtoiles <= nbrEtoiles)
-			{*/
+		if(sortie.sprite.needEtoiles != null) {//si on est pas au tuto
 				var win = game.add.audio("win");
 				game.state.start("EcranWin", true, false, state, etoileGagne, sortie.sprite.needEtoiles);
 				win.play();
-			/*}
-			else
-			{
-				game.state.restart();
-			}*/
 		}
-		else{
+		else
 			game.state.start(state);
-		}
+
 		checkSortie = false;
 	}
 }// <<impactPersoSortie

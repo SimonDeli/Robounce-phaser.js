@@ -1,10 +1,11 @@
-function PauseBoutton(game, x, y, source, callback, etoilesNecessaire){
+function PauseBoutton(game, x, y, source, callback, context){
 	Phaser.Button.call(this, game, x, y, source, callback, this, 1, 0, 2);
 	game.add.existing(this);
-	
+
 	this.anchor.set(0.5);
 	this.callback = callback;
 	this.id = 0;
+	this.context = context;
 
 }
 

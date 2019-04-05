@@ -321,7 +321,7 @@ MyGame.StateLevel3.prototype = {
 			game.input.mouse.capture = true;
 
 			pauseBoutton = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
-			pauseBoutton.onDown.add(fonctionsService.pauseFunction, this);
+			pauseBoutton.onDown.add(fonctionsService.pauseFunction, fonctionsService);
 
 			this.explicationGrp = game.add.group();
 

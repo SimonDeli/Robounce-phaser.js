@@ -366,7 +366,7 @@ MyGame.StateLevel5.prototype = {
 			game.input.mouse.capture = true;
 
 			pauseBoutton = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
-			pauseBoutton.onDown.add(fonctionsService.pauseFunction, this);
+			pauseBoutton.onDown.add(fonctionsService.pauseFunction, fonctionsService);
 
 			fonctionsService.affichageEtoile();
 			fonctionsService.iconeInformation();

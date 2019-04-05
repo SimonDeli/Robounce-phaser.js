@@ -215,7 +215,7 @@ MyGame.StateTuto.prototype = {
 			game.input.mouse.capture = true;
 
 			pauseBoutton = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
-			pauseBoutton.onDown.add(fonctionsService.pauseFunction, this);
+			pauseBoutton.onDown.add(fonctionsService.pauseFunction, fonctionsService);
 
 			this.informations = game.add.sprite(0, 0, "ecranInformations");
 			this.informations.alpha = 0;
