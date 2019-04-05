@@ -23,8 +23,7 @@ MyGame.StateLevel2.prototype = {
 
 			//PHYSICS
 			checkSortie = true;
-
-			console.log("ETOILES "+nbrEtoiles);
+			
 			game.physics.startSystem(Phaser.Physics.P2JS);
 			game.physics.p2.gravity.y = 5000;
 			game.physics.p2.setImpactEvents(true);
@@ -33,7 +32,7 @@ MyGame.StateLevel2.prototype = {
 			background = game.add.sprite(0, 0, "background");
 
 				//BORD
-			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+			var bordures = initialisationService.creationBordure(); // voir "FonctionsAutre.js"
 
 				//PLATEFORME
 			plateforme1 = new Plateforme(game, 0, 0, "plateforme1", debug);
@@ -144,7 +143,7 @@ MyGame.StateLevel2.prototype = {
 
 
 				//CREATION GROUPES
-			fonctionsService.creationGrp(); //voir "FonctionsAutre.js"
+			initialisationService.creationGrp(); //voir "FonctionsAutre.js"
 
 				//ADD GROUPES
 					//BOUTONS
@@ -195,7 +194,7 @@ MyGame.StateLevel2.prototype = {
 			levelComplete.needEtoiles = 5;
 			levelComplete.numeroNiveau = 2;
 				//CREATION COLLISION GROUPE
-			fonctionsService.creationCollisionGrp(); //voir "FonctionsAutre.js"
+			var collisionGroup = initialisationService.creationCollisionGrp(); //voir "FonctionsAutre.js"
 
 				//SET SHAPES (les bumpers et bouton sont directement fait dans leur classe)
 			plateforme_sol1.body.setRectangleFromSprite(plateforme_sol1);

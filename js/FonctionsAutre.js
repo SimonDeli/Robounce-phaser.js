@@ -1,38 +1,6 @@
 var FonctionsService = function(){}
 
 FonctionsService.prototype.constructor=FonctionsService;
-FonctionsService.prototype.creationBordure = function(){
-	var bordures = new Array();
-	this.bordHorizontalB = new Plateforme(game, game.world.width/2, game.world.height, "bordH", debug);
-		this.bordHorizontalB.body.y = game.world.height + this.bordHorizontalB.height/2;
-
-	this.bordHorizontalH = new Plateforme(game, game.world.width/2, 0, "bordH", debug);
-		this.bordHorizontalH.body.y = 0 - this.bordHorizontalH.height/2;
-
-	this.bordVerticalD = new Plateforme(game, game.world.width, game.world.height/2, "bordV", debug);
-		this.bordVerticalD.body.x = game.world.width + this.bordVerticalD.width/2;
-
-	this.bordVerticalG = new Plateforme(game, 0, game.world.height/2, "bordV", debug);
-		this.bordVerticalG.body.x = 0 - this.bordVerticalG.width/2;
-
-	this.bordHorizontalB.body.sprite.alpha = 0;
-	this.bordHorizontalH.body.sprite.alpha = 0;
-	this.bordVerticalD.body.sprite.alpha = 0;
-	this.bordVerticalG.body.sprite.alpha = 0;
-
-	this.bordHorizontalB.body.setRectangleFromSprite(this.bordHorizontalB);
-	this.bordHorizontalH.body.setRectangleFromSprite(this.bordHorizontalH);
-	this.bordVerticalG.body.setRectangleFromSprite(this.bordVerticalG);
-	this.bordVerticalD.body.setRectangleFromSprite(this.bordVerticalD);
-
-	bordures.push(this.bordHorizontalH);
-	bordures.push(this.bordVerticalD);
-	bordures.push(this.bordHorizontalB);
-	bordures.push(this.bordVerticalG);
-
-	return bordures;
-},
-
 FonctionsService.prototype.styleSheet = function(frameDebut, frameFin, objet, nom){ //facilite la creation et l'affectation des animations
 	var tableau = new Array();
 	for(var i = frameDebut ; i <= frameFin ; i++){
@@ -41,76 +9,6 @@ FonctionsService.prototype.styleSheet = function(frameDebut, frameFin, objet, no
 	var anim = objet.animations.add(nom, tableau);
 	return anim;
 },// <<styleSheet
-
-FonctionsService.prototype.creationCollisionGrp = function(){
-	plateformeCollisionGroup = game.physics.p2.createCollisionGroup();
-	plateformeRebondCollisionGroup = game.physics.p2.createCollisionGroup();
-	personnageCollisionGroup = game.physics.p2.createCollisionGroup();
-	bumperCollisionGroup = game.physics.p2.createCollisionGroup();
-	boutonCollisionGroup = game.physics.p2.createCollisionGroup();
-	porteCollisionGroup = game.physics.p2.createCollisionGroup();
-	sortieCollisionGroup = game.physics.p2.createCollisionGroup();
-	projectileCollisionGroup = game.physics.p2.createCollisionGroup();
-},
-
-FonctionsService.prototype.creationGrp = function(){
-	porteGrp = game.add.group();
-	boutonGrp = game.add.group();
-	bumperGrp = game.add.group();
-	plateformeGrp = game.add.group();
-	rebondGrp = game.add.group();
-},
-FonctionsService.prototype.creationSons = function (){
-	bruitageGrp = new Array();
-	musiqueGrp = new Array();
-
-	sonTir = game.add.audio("tir", 1, false);
-	sonImpactPlateforme = game.add.audio("impact_plateforme", 1, false);
-	sonImpactPlateformeRebond = game.add.audio("impact_plateforme_rebond", 1, false);
-	sonOuverturePorte = game.add.audio("ouverture_porte", 1, false);
-	sonFermeturePorte = game.add.audio("fermeture_porte", 1, false);
-	sonTournePlateforme = game.add.audio("tourne_plateforme", 1, false);
-	sonImpactLaser = game.add.audio("impact_laser", 1, false);
-
-	sonKlaxon = game.add.audio("klaxon", 1, false);
-	sonJump = game.add.audio("jump", 1, false);
-	sonPopProj = game.add.audio("pop_proj", 1, false);
-
-	son1 = game.add.audio("1", 1, false);
-	son2 = game.add.audio("2", 1, false);
-
-	lose = game.add.audio("lose", 1, false);
-
-	error = game.add.audio("error", 1, false);
-
-	musiqueMenu = game.add.audio("musiqueMenu", 1, true);
-	musiqueNiveau = game.add.audio("musiqueNiveau", 1, true);
-
-	bruitageGrp.push(sonTir);
-	bruitageGrp.push(sonImpactPlateforme);
-	bruitageGrp.push(sonImpactPlateformeRebond);
-	bruitageGrp.push(sonOuverturePorte);
-	bruitageGrp.push(sonFermeturePorte);
-	bruitageGrp.push(sonTournePlateforme);
-	bruitageGrp.push(sonImpactLaser);
-	bruitageGrp.push(sonKlaxon);
-	bruitageGrp.push(sonJump);
-	bruitageGrp.push(sonPopProj);
-
-	bruitageGrp.push(son1);
-	bruitageGrp.push(son2);
-
-	bruitageGrp.push(lose);
-	bruitageGrp.push(error);
-
-
-
-	musiqueGrp.push(musiqueMenu);
-	musiqueGrp.push(musiqueNiveau);
-
-	console.log("hey hey hey");
-},
-
 FonctionsService.prototype.ouverturePorte = function(porte, bouton, lumiere, distance){
 	if(porte.porteOuverte === false){
 		console.log(porte.porteOuverte);
@@ -134,33 +32,33 @@ FonctionsService.prototype.rotationPlateformeRebond = function(plateforme){
 
 },
 
-FonctionsService.prototype.tirProjectile = function(velocX, velocY){
+FonctionsService.prototype.tirProjectile = function(velocX, velocY, collisionGroup){
 	//if (!(projectileLance)){ //s'il n'y a pas de projectiles en cours
 		sonTir.play();
 		projectileLance = true; //un projectile est en cours
 		projectile = new Projectile(game, personnage.x, personnage.y+50, velocX, velocY, "projectile", debug); //creation du proj
 
 			//SET COLLISION GROUP PROJ
-		projectile.body.setCollisionGroup(projectileCollisionGroup);
+		projectile.body.setCollisionGroup(collisionGroup.projectileCollisionGroup);
 
 			//COLLIDES
-		projectile.body.collides(plateformeRebondCollisionGroup, collisionsService.impactRebond, this);
-		projectile.body.collides(plateformeCollisionGroup, collisionsService.impactProjPlateforme, this);
-		projectile.body.collides(boutonCollisionGroup, collisionsService.impactProjBouton, this);
-		projectile.body.collides(porteCollisionGroup, collisionsService.impactProjPorte, this);
+		projectile.body.collides(collisionGroup.plateformeRebondCollisionGroup, collisionsService.impactRebond, this);
+		projectile.body.collides(collisionGroup.plateformeCollisionGroup, collisionsService.impactProjPlateforme, this);
+		projectile.body.collides(collisionGroup.boutonCollisionGroup, collisionsService.impactProjBouton, this);
+		projectile.body.collides(collisionGroup.porteCollisionGroup, collisionsService.impactProjPorte, this);
 
 		for(var i = 0 ; i < plateformeGrp.length ; i++){
-			plateformeGrp.children[i].body.collides(projectileCollisionGroup);
+			plateformeGrp.children[i].body.collides(collisionGroup.projectileCollisionGroup);
 		}
 		for(var i = 0 ; i < rebondGrp.length ; i++){
-			rebondGrp.children[i].body.collides(projectileCollisionGroup);
+			rebondGrp.children[i].body.collides(collisionGroup.projectileCollisionGroup);
 		}
 		for(var i = 0 ; i < boutonGrp.length ; i++){
-			boutonGrp.children[i].body.collides(projectileCollisionGroup);
+			boutonGrp.children[i].body.collides(collisionGroup.projectileCollisionGroup);
 		}
 
 		for(var i = 0 ; i < porteGrp.length ; i++){
-			porteGrp.children[i].body.collides(projectileCollisionGroup);
+			porteGrp.children[i].body.collides(collisionGroup.projectileCollisionGroup);
 		}
 			//MATERIAL CREATION
 		var tableauMat = new Array();

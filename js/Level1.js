@@ -18,64 +18,51 @@ MyGame.StateLevel1.prototype = {
 
 			game.load.image("plateforme_sol1", "assets/level_1/plateformes/plateformeSol1.png");
 			game.load.image("plateforme_sol2", "assets/level_1/plateformes/plateformeSol2.png");
-
-
-
 		},// <<PRELOAD
-
-
 		create:function(){
-
+			var levelService = new LevelService(game);
 
 			checkSortie = true;
-			//PHYSICS
-			game.physics.startSystem(Phaser.Physics.P2JS);
-			game.physics.p2.gravity.y = 5000;
-			game.physics.p2.setImpactEvents(true);
-
-			//ADD SPRITE
-			background = game.add.sprite(0, 0, "background");
-
 				//BORD
-			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+
 
 				//PLATEFORME
-			plateforme1 = new Plateforme(game, 0, 0, "plateforme1", debug);
-				plateforme1.body.x = 0 + plateforme1.width/2;
-				plateforme1.body.y = 0 + plateforme1.height/2;
+			this.plateforme1 = levelService.createPlateforme(0, 0, "plateforme1", debug);
+			this.plateforme1.body.x = 0 + this.plateforme1.width/2;
+			this.plateforme1.body.y = 0 + this.plateforme1.height/2;
 
-			plateforme2 = new Plateforme(game, game.world.width/2, 0, "plateforme2", debug);
-				plateforme2.body.y = 0 + plateforme2.height/2 -150;
+			this.plateforme2 = levelService.createPlateforme(game.world.width/2, 0, "plateforme2", debug);
+				this.plateforme2.body.y = 0 + this.plateforme2.height/2 -150;
 
-			plateforme3 = new Plateforme(game, 0, game.world.height/2 +35, "plateforme3", debug);
-				plateforme3.body.x = game.world.width - plateforme3.width/2 + 50;
+			this.plateforme3 = levelService.createPlateforme(0, game.world.height/2 +35, "plateforme3", debug);
+				this.plateforme3.body.x = game.world.width - this.plateforme3.width/2 + 50;
 
-			plateforme4 = new Plateforme(game, 0, 0, "plateforme4", debug);
-				plateforme4.body.x = plateforme2.body.x + plateforme4.width/2 - 10;
-				plateforme4.body.y = plateforme2.body.y + 370;
+			this.plateforme4 = levelService.createPlateforme(0, 0, "plateforme4", debug);
+				this.plateforme4.body.x = this.plateforme2.body.x + this.plateforme4.width/2 - 10;
+				this.plateforme4.body.y = this.plateforme2.body.y + 370;
 
-			plateforme_sol1 = new Plateforme(game, 0, 900, "plateforme_sol1", debug);
-				plateforme_sol1.body.x = 0 + plateforme_sol1.width/2;
+			this.plateforme_sol1 = levelService.createPlateforme(0, 900, "plateforme_sol1", debug);
+				this.plateforme_sol1.body.x = 0 + this.plateforme_sol1.width/2;
 
-			plateforme_sol2 = new Plateforme(game, 0, 1000, "plateforme_sol2", debug);
-				plateforme_sol2.body.x = plateforme_sol1.width + plateforme_sol2.width/2;
+			this.plateforme_sol2 = levelService.createPlateforme(0, 1000, "plateforme_sol2", debug);
+				this.plateforme_sol2.body.x = this.plateforme_sol1.width + this.plateforme_sol2.width/2;
 
-			plateformeRebond1 = new Plateforme(game, 0,0, "plateformeRebond", debug);
-				plateformeRebond1.body.x = 0 + plateformeRebond1.width/2;
-				plateformeRebond1.body.y = plateforme1.height + plateformeRebond1.height/2;
+			this.plateformeRebond1 = levelService.createPlateformeRebond(0, 0, "plateformeRebond", debug);
+				this.plateformeRebond1.body.x = 0 + this.plateformeRebond1.width/2;
+				this.plateformeRebond1.body.y = this.plateforme1.height + this.plateformeRebond1.height/2;
 
-			plateformeRebond2 = new Plateforme(game, 0,0, "plateformeRebond", debug);
-				plateformeRebond2.body.x = game.world.width - plateforme3.width - plateformeRebond2.width/2 + 50;
-				plateformeRebond2.body.y = plateforme3.body.y - plateforme3.height/2;
-				plateformeRebond2.angle = 90;
+			this.plateformeRebond2 = levelService.createPlateformeRebond(0, 0, "plateformeRebond", debug);
+				this.plateformeRebond2.body.x = game.world.width - this.plateforme3.width - this.plateformeRebond2.width/2 + 50;
+				this.plateformeRebond2.body.y = this.plateforme3.body.y - this.plateforme3.height/2;
+				this.plateformeRebond2.angle = 90;
 
 				//BUMPER
 			bumper1 = new Bumper(game, 700, 0, "bumper", debug);
-				bumper1.body.y = plateforme_sol2.body.y-10;
+				bumper1.body.y = this.plateforme_sol2.body.y-10;
 
 
 			levelComplete = new Bumper(game, game.world.width-20, game.world.height-190, "bumper", debug);
-				levelComplete.body.y = plateforme_sol2.body.y-10;
+			levelComplete.body.y = this.plateforme_sol2.body.y-10;
 			levelComplete.anchor.setTo(0.5);
 			levelComplete.scale.set(0.8, 1);
 			levelComplete.alpha = 0;
@@ -87,8 +74,8 @@ MyGame.StateLevel1.prototype = {
 			lumierePorteV = new Lumiere(game, "lumierePorteViolet");
 			lueurePorteV = new Lumiere(game, "lueurePorteViolet");
 			porteV = new Porte(game, 1800, 0, lumierePorteV, lueurePorteV, null, "vertical", "laserViolet", debug);
-				porteV.deplacement = porteV.height - 15;
-				porteV.body.y = plateforme_sol2.body.y-plateforme_sol2.height/2-porteV.height/2;
+			porteV.deplacement = porteV.height - 15;
+			porteV.body.y = this.plateforme_sol2.body.y-this.plateforme_sol2.height/2-porteV.height/2;
 
 			lueurePorteV.tweenScaleBoucle(0.5, 0, 800);
 			lumierePorteV.tweenScaleBoucle(0.3, 0.3, 800);
@@ -96,26 +83,26 @@ MyGame.StateLevel1.prototype = {
 			lumierePorteVe = new Lumiere(game, "lumierePorteVert");
 			lueurePorteVe = new Lumiere(game, "lueurePorteVert");
 			porteVe = new Porte(game, 0, 0, lumierePorteVe, lueurePorteVe, null, "vertical", "laserVert",  debug);
-				porteVe.deplacement = porteVe.height - 15;
-				porteVe.body.x = plateforme2.body.x + 5;
-				porteVe.body.y = plateforme2.height + porteVe.height/2 - 150;
+			porteVe.deplacement = porteVe.height - 15;
+			porteVe.body.x = this.plateforme2.body.x + 5;
+			porteVe.body.y = this.plateforme2.height + porteVe.height/2 - 150;
 
 			lueurePorteVe.tweenScaleBoucle(0.5, 0, 800);
 			lumierePorteVe.tweenScaleBoucle(0.3, 0.3, 800);
 
 				//BOUTONS
 			boutonV = new Bouton(game, 1860, 200, "porte", porteV, null, 0, "vertical", "boutonViolet", debug);
-				boutonV.body.x = game.world.width - boutonV.width/2;
-				boutonV.deplacement = +boutonV.width/2;
+			boutonV.body.x = game.world.width - boutonV.width/2;
+			boutonV.deplacement = +boutonV.width/2;
 			boutonVe = new Bouton(game, 0, 0, "porte", porteVe, null, 0, "vertical","boutonVert", debug);
-				boutonVe.angle = 180;
-				boutonVe.deplacement = -boutonVe.width/2;
-				boutonVe.body.x = plateforme4.body.x - plateforme4.width/2 + boutonVe.width/2 + 30;
-				boutonVe.body.y = plateforme4.body.y - 20;
+			boutonVe.angle = 180;
+			boutonVe.deplacement = -boutonVe.width/2;
+			boutonVe.body.x = this.plateforme4.body.x - this.plateforme4.width/2 + boutonVe.width/2 + 30;
+			boutonVe.body.y = this.plateforme4.body.y - 20;
 
 
 				//CREATION GROUPES
-			fonctionsService.creationGrp(); //voir "FonctionsAutre.js"
+			initialisationService.creationGrp(); //voir "FonctionsAutre.js"
 
 				//ADD GROUPES
 					//BOUTONS
@@ -131,21 +118,13 @@ MyGame.StateLevel1.prototype = {
 
 
 					//BORDS
-			for(var i = 0 ; i<bordures.length ; i++){
-				plateformeGrp.add(bordures[i]);
+			for(var i = 0 ; i<levelService.bordures.length ; i++){
+				plateformeGrp.add(levelService.bordures[i]);
 			}
 
 					//PLATEFORMES
-			plateformeGrp.add(plateforme_sol1);
-			plateformeGrp.add(plateforme_sol2);
-
-			plateformeGrp.add(plateforme1);
-			plateformeGrp.add(plateforme2);
-			plateformeGrp.add(plateforme3);
-			plateformeGrp.add(plateforme4);
-
-			rebondGrp.add(plateformeRebond1);
-			rebondGrp.add(plateformeRebond2);
+			levelService.createPlateformeGroup(plateformeGrp, false);
+			levelService.createPlateformeGroup(rebondGrp, true)
 
 				//PERSONNAGE
 			personnage = new Player(game, this.positionPerso.x, this.positionPerso.y, "reposD", debug);
@@ -160,71 +139,45 @@ MyGame.StateLevel1.prototype = {
 
 
 				//CREATION COLLISION GROUPE
-			fonctionsService.creationCollisionGrp(); //voir "FonctionsAutre.js"
+			this.collisionGroup = initialisationService.creationCollisionGrp(); //voir "FonctionsAutre.js"
 
 				//SET SHAPES (les bumpers et bouton sont directement fait dans leur classe)
-			plateforme_sol1.body.setRectangleFromSprite(plateforme_sol1);
-			plateforme_sol2.body.setRectangleFromSprite(plateforme_sol2);
+			this.plateforme_sol1.body.setRectangleFromSprite(this.plateforme_sol1);
+			this.plateforme_sol2.body.setRectangleFromSprite(this.plateforme_sol2);
 
 
-			plateforme1.body.loadPolygon("physicsData1", "plateforme1");
-			plateforme2.body.loadPolygon("physicsData1", "plateforme2");
-			plateforme3.body.loadPolygon("physicsData1", "plateforme3");
-			plateforme4.body.loadPolygon("physicsData1", "plateforme4");
+			this.plateforme1.body.loadPolygon("physicsData1", "plateforme1");
+			this.plateforme2.body.loadPolygon("physicsData1", "plateforme2");
+			this.plateforme3.body.loadPolygon("physicsData1", "plateforme3");
+			this.plateforme4.body.loadPolygon("physicsData1", "plateforme4");
 
-			plateformeRebond1.body.loadPolygon("physicsData1", "plateformeRebond");
-			plateformeRebond2.body.loadPolygon("physicsData1", "plateformeRebond2");
+			this.plateformeRebond1.body.loadPolygon("physicsData1", "plateformeRebond");
+			this.plateformeRebond2.body.loadPolygon("physicsData1", "plateformeRebond2");
 
 			//plateformeRebond.body.loadPolygon("physicsData", "plateformeRebond");
 
 				//SET COLLISIONS_GROUPES
 					//bumper
-			for(var i = 0 ; i < bumperGrp.length ; i++){
-				bumperGrp.children[i].body.setCollisionGroup(bumperCollisionGroup);
-			}
-					//plateforme
+			levelService.setCollisionGroup(plateformeGrp, rebondGrp, bumperGrp, boutonGrp, porteGrp, personnage, levelComplete, this.collisionGroup);
+
+			personnage.body.collides(this.collisionGroup.plateformeCollisionGroup, collisionsService.impactPersoPlateforme, this);
 			for(var i = 0 ; i < plateformeGrp.length ; i++){
-				plateformeGrp.children[i].body.setCollisionGroup(plateformeCollisionGroup);
-			}
-					//plateforme_rebond
-			for(var i = 0 ; i < rebondGrp.length ; i++){
-				rebondGrp.children[i].body.setCollisionGroup(plateformeRebondCollisionGroup);
-			}
-					//boutons
-			for(var i = 0 ; i < boutonGrp.length ; i++){
-				boutonGrp.children[i].body.setCollisionGroup(boutonCollisionGroup);
-			}
-
-					//portes
-			for(var i = 0 ; i < porteGrp.length ; i++){
-				porteGrp.children[i].body.setCollisionGroup(porteCollisionGroup);
-			}
-						//personnage
-			personnage.body.setCollisionGroup(personnageCollisionGroup);
-					//sortie
-			levelComplete.body.setCollisionGroup(sortieCollisionGroup);
-
-				//COLLIDES (certains sont dans la fonction "tirProjectiles --> "FonctionsAutre.js")
-					//Plateforme -> Personnage
-
-			personnage.body.collides(plateformeCollisionGroup, collisionsService.impactPersoPlateforme, this);
-			for(var i = 0 ; i < plateformeGrp.length ; i++){
-				plateformeGrp.children[i].body.collides(personnageCollisionGroup);
+				plateformeGrp.children[i].body.collides(this.collisionGroup.personnageCollisionGroup);
 			}
 					//Personnage -> Bumper
-			personnage.body.collides(bumperCollisionGroup, collisionsService.impactPersoBumper, this);
+			personnage.body.collides(this.collisionGroup.bumperCollisionGroup, collisionsService.impactPersoBumper, this);
 			for(var i = 0 ; i < bumperGrp.length ; i++){
-				bumperGrp.children[i].body.collides(personnageCollisionGroup);
+				bumperGrp.children[i].body.collides(this.collisionGroup.personnageCollisionGroup);
 			}
 					//Personnage -> Porte
-			personnage.body.collides(porteCollisionGroup);
+			personnage.body.collides(this.collisionGroup.porteCollisionGroup);
 			for(var i = 0 ; i < porteGrp.length ; i++){
-				porteGrp.children[i].body.collides(personnageCollisionGroup);
+				porteGrp.children[i].body.collides(this.collisionGroup.personnageCollisionGroup);
 			}
 
 					//Personnage -> Sortie
-			levelComplete.body.collides(personnageCollisionGroup);
-			personnage.body.collides(sortieCollisionGroup, collisionsService.impactPersoSortie, this);
+			levelComplete.body.collides(this.collisionGroup.personnageCollisionGroup);
+			personnage.body.collides(this.collisionGroup.sortieCollisionGroup, collisionsService.impactPersoSortie, this);
 
 				//CIBLE (curseur)
 			cible = game.add.sprite(-10, -10, "cible");
@@ -259,7 +212,7 @@ MyGame.StateLevel1.prototype = {
 
 			personnage.walk();
 			personnage.repos();
-			personnage.tir();
+			personnage.tir(this.collisionGroup);
 			fonctionsService.gamePerdu();
 			personnage.klaxon();
 

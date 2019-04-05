@@ -159,7 +159,7 @@ Player.prototype.repos = function(){
 	}
 };
 
-Player.prototype.tir = function(){
+Player.prototype.tir = function(collisionGroup){
 	if(game.input.activePointer.leftButton.isDown){
 		if (!(projectileLance)) //s'il n'y a pas de projectiles en cours
 		{
@@ -213,7 +213,7 @@ Player.prototype.tir = function(){
 				if(this.nbrTir < 0){
 					this.perdu = true;
 				}
-				fonctionsService.tirProjectile(velocX, velocY); //voir "FonctionsAutre.js"
+				fonctionsService.tirProjectile(velocX, velocY, collisionGroup); //voir "FonctionsAutre.js"
 			}
 		}
 	}

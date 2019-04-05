@@ -37,7 +37,7 @@ MyGame.StateLevel5.prototype = {
 			background = game.add.sprite(0, 0, "background");
 
 				//BORD
-			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+			var bordures = initialisationService.creationBordure(); // voir "FonctionsAutre.js"
 
 				//PLATEFORME
 			plateforme1 = new Plateforme(game, 0, 0, "plateforme1", debug);
@@ -215,7 +215,7 @@ MyGame.StateLevel5.prototype = {
 
 
 				//CREATION GROUPES
-			fonctionsService.creationGrp(); //voir "FonctionsAutre.js"
+			initialisationService.creationGrp(); //voir "FonctionsAutre.js"
 
 				//ADD GROUPES
 					//BUMPER
@@ -273,7 +273,7 @@ MyGame.StateLevel5.prototype = {
 			levelComplete.needEtoiles = 13;
 			levelComplete.numeroNiveau = 5;
 				//CREATION COLLISION GROUPE
-			fonctionsService.creationCollisionGrp(); //voir "FonctionsAutre.js"
+			var collisionGroup = initialisationService.creationCollisionGrp(); //voir "FonctionsAutre.js"
 
 
 

@@ -17,7 +17,7 @@ MyGame.StateMenuP.prototype = {
 
 			son1 = game.add.audio("1");
 			if(!sonCree)
-				{fonctionsService.creationSons();
+				{initialisationService.creationSons();
 				sonCree = true}
 
 			backgroundGrp = game.add.group();

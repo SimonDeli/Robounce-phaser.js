@@ -47,7 +47,7 @@ MyGame.StateTuto.prototype = {
 			background = game.add.sprite(0, 0, "background");
 
 				//BORD
-			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+			var bordures = initialisationService.creationBordure(); // voir "FonctionsAutre.js"
 
 				//PLATEFORME
 			plateforme1 = new Plateforme(game, 1500, 250, "plateforme1", debug);
@@ -109,7 +109,7 @@ MyGame.StateTuto.prototype = {
 
 
 				//CREATION GROUPES
-			fonctionsService.creationGrp(); //voir "FonctionsAutre.js"
+			initialisationService.creationGrp(); //voir "FonctionsAutre.js"
 
 				//ADD GROUPES
 					//BOUTONS
@@ -143,7 +143,7 @@ MyGame.StateTuto.prototype = {
 			personnage.affichageVie();
 
 				//CREATION COLLISION GROUPE
-			fonctionsService.creationCollisionGrp(); //voir "FonctionsAutre.js"
+			var collisionGroup = initialisationService.creationCollisionGrp(); //voir "FonctionsAutre.js"
 
 				//SET SHAPES (les bumpers et bouton sont directement fait dans leur classe)
 			plateforme_sol1.body.setRectangleFromSprite(plateforme_sol1);
