@@ -12,32 +12,32 @@ function impactPersoBumper(personnage, bumper){
 
 function impactProjPlateforme(projectile, plateforme){
 	console.log("<b>impactProjPlateforme</b>");
-	
+
 	sonImpactPlateforme.play();
-	
+
 	projectile.sprite.disparition();
 	projectileLance = false;
-	
+
 }// <<impactProjPlateforme
 
 function impactProjBouton(projectile, bouton){
 	console.log("<b>impactProjBouton</b>");
 	projectile.sprite.disparition();
 	projectileLance = false;
-	
+
 	if(bouton.sprite.type === "porte"){
-		
-		ouverturePorte(bouton.sprite.declenche1, bouton.sprite, bouton.sprite.declenche1.lumiere, bouton.sprite.deplacement); //voir "FonctionsAutres.js"
+
+		fonctionsService.ouverturePorte(bouton.sprite.declenche1, bouton.sprite, bouton.sprite.declenche1.lumiere, bouton.sprite.deplacement); //voir "FonctionsAutres.js"
 	}
 	if(bouton.sprite.type === "doublePorte"){
-		ouverturePorte(bouton.sprite.declenche1, bouton.sprite, bouton.sprite.declenche1.lumiere, null);
-		ouverturePorte(bouton.sprite.declenche2, bouton.sprite, bouton.sprite.declenche2.lumiere, bouton.sprite.deplacement);
+		fonctionsService.ouverturePorte(bouton.sprite.declenche1, bouton.sprite, bouton.sprite.declenche1.lumiere, null);
+		fonctionsService.ouverturePorte(bouton.sprite.declenche2, bouton.sprite, bouton.sprite.declenche2.lumiere, bouton.sprite.deplacement);
 	}
 	if(bouton.sprite.type === "plateformeRebond"){
-		rotationPlateformeRebond(bouton.sprite.declenche1);
+		fonctionsService.rotationPlateformeRebond(bouton.sprite.declenche1);
 	}
 	if(bouton.sprite.type === "plateforme"){
-		deplacementPlateforme(bouton.sprite.declenche1, bouton.sprite);
+		fonctionsService.deplacementPlateforme(bouton.sprite.declenche1, bouton.sprite);
 	}
 }
 // <<impactProjBouton
@@ -48,7 +48,7 @@ function impactProjPorte(projectile, porte){
 	if(porte.sprite.porteOuverte === false)
 	{
 		console.log("porteOuverte");
-		
+
 	}
 }
 // <<impactProjPorte
@@ -89,7 +89,7 @@ function impactPersoSortie(personnage, sortie){
 			{
 				nbrEtoiles += 0;
 			}
-			
+
 			else if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile == true)
 			{
 				nbrEtoiles += 1;
@@ -98,12 +98,12 @@ function impactPersoSortie(personnage, sortie){
 			{
 				nbrEtoiles += 2;
 			}
-			
-			
+
+
 			console.log("2 ETOILES");
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 2) //si Il a deja gagné 2 étoiles ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 2;
-			
+
 			checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles = true;
 			etoileGagne = 2;
 		}
@@ -112,7 +112,7 @@ function impactPersoSortie(personnage, sortie){
 				{
 					nbrEtoiles += 0;
 				}
-			
+
 			else if(checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].deux_etoiles == true)
 				{
 					nbrEtoiles += 0;
@@ -121,18 +121,18 @@ function impactPersoSortie(personnage, sortie){
 				{
 				nbrEtoiles += 1;
 				}
-			
-			
+
+
 			console.log("1 ETOILE");
 			if(liste_niveau[sortie.sprite.numeroNiveau-1] <= 1)// si il a déjà gagné 1 etoile ou moins
 				liste_niveau[sortie.sprite.numeroNiveau-1] = 1;
 
 			checkEtoileNiveau[sortie.sprite.numeroNiveau - 1].une_etoile = true;
-			etoileGagne = 1;	
+			etoileGagne = 1;
 		}
-			
-			
-		
+
+
+
 		if(sortie.sprite.needEtoiles != null) //si on est pas au tuto
 		{
 			/*if(sortie.sprite.needEtoiles <= nbrEtoiles)
@@ -141,7 +141,7 @@ function impactPersoSortie(personnage, sortie){
 				game.state.start("EcranWin", true, false, state, etoileGagne, sortie.sprite.needEtoiles);
 				win.play();
 			/*}
-			else 
+			else
 			{
 				game.state.restart();
 			}*/
@@ -156,5 +156,5 @@ function impactPersoSortie(personnage, sortie){
 function impactRebond(body1, body2){
 	sonImpactPlateformeRebond.play();
 	body1.sprite.tweenScale();
-	
+
 }
