@@ -2,24 +2,35 @@ var FonctionsService = function(){}
 
 FonctionsService.prototype.constructor=FonctionsService;
 FonctionsService.prototype.creationBordure = function(){
-	bordHorizontalB = new Plateforme(game, game.world.width/2, game.world.height, "bordH", debug);
-		bordHorizontalB.body.y = game.world.height + bordHorizontalB.height/2;
-	bordHorizontalH = new Plateforme(game, game.world.width/2, 0, "bordH", debug);
-		bordHorizontalH.body.y = 0 - bordHorizontalH.height/2;
-	bordVerticalD = new Plateforme(game, game.world.width, game.world.height/2, "bordV", debug);
-		bordVerticalD.body.x = game.world.width + bordVerticalD.width/2;
-	bordVerticalG = new Plateforme(game, 0, game.world.height/2, "bordV", debug);
-		bordVerticalG.body.x = 0 - bordVerticalG.width/2;
+	var bordures = new Array();
+	this.bordHorizontalB = new Plateforme(game, game.world.width/2, game.world.height, "bordH", debug);
+		this.bordHorizontalB.body.y = game.world.height + this.bordHorizontalB.height/2;
 
-	bordHorizontalB.body.sprite.alpha = 0;
-	bordHorizontalH.body.sprite.alpha = 0;
-	bordVerticalD.body.sprite.alpha = 0;
-	bordVerticalG.body.sprite.alpha = 0;
+	this.bordHorizontalH = new Plateforme(game, game.world.width/2, 0, "bordH", debug);
+		this.bordHorizontalH.body.y = 0 - this.bordHorizontalH.height/2;
 
-	bordHorizontalB.body.setRectangleFromSprite(bordHorizontalB);
-	bordHorizontalH.body.setRectangleFromSprite(bordHorizontalH);
-	bordVerticalG.body.setRectangleFromSprite(bordVerticalG);
-	bordVerticalD.body.setRectangleFromSprite(bordVerticalD);
+	this.bordVerticalD = new Plateforme(game, game.world.width, game.world.height/2, "bordV", debug);
+		this.bordVerticalD.body.x = game.world.width + this.bordVerticalD.width/2;
+
+	this.bordVerticalG = new Plateforme(game, 0, game.world.height/2, "bordV", debug);
+		this.bordVerticalG.body.x = 0 - this.bordVerticalG.width/2;
+
+	this.bordHorizontalB.body.sprite.alpha = 0;
+	this.bordHorizontalH.body.sprite.alpha = 0;
+	this.bordVerticalD.body.sprite.alpha = 0;
+	this.bordVerticalG.body.sprite.alpha = 0;
+
+	this.bordHorizontalB.body.setRectangleFromSprite(this.bordHorizontalB);
+	this.bordHorizontalH.body.setRectangleFromSprite(this.bordHorizontalH);
+	this.bordVerticalG.body.setRectangleFromSprite(this.bordVerticalG);
+	this.bordVerticalD.body.setRectangleFromSprite(this.bordVerticalD);
+
+	bordures.push(this.bordHorizontalH);
+	bordures.push(this.bordVerticalD);
+	bordures.push(this.bordHorizontalB);
+	bordures.push(this.bordVerticalG);
+
+	return bordures;
 },
 
 FonctionsService.prototype.styleSheet = function(frameDebut, frameFin, objet, nom){ //facilite la creation et l'affectation des animations

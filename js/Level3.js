@@ -70,7 +70,7 @@ MyGame.StateLevel3.prototype = {
 			background = game.add.sprite(0, 0, "background");
 
 				//BORD
-			fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
 
 				//PLATEFORME
 			plateforme1 = new Plateforme(game, 0, 0, "plateforme1", debug);
@@ -203,10 +203,9 @@ MyGame.StateLevel3.prototype = {
 			porteGrp.add(porteVe2);
 
 					//BORDS
-			plateformeGrp.add(bordHorizontalB);
-			plateformeGrp.add(bordHorizontalH);
-			plateformeGrp.add(bordVerticalG);
-			plateformeGrp.add(bordVerticalD);
+					for(var i = 0 ; i<bordures.length ; i++){
+						plateformeGrp.add(bordures[i]);
+					}
 
 					//PLATEFORMES
 			plateformeGrp.add(plateforme_sol1);

@@ -47,7 +47,7 @@ MyGame.StateTuto.prototype = {
 			background = game.add.sprite(0, 0, "background");
 
 				//BORD
-			fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
+			var bordures = fonctionsService.creationBordure(); // voir "FonctionsAutre.js"
 
 				//PLATEFORME
 			plateforme1 = new Plateforme(game, 1500, 250, "plateforme1", debug);
@@ -123,10 +123,9 @@ MyGame.StateTuto.prototype = {
 			bumperGrp.add(bumper2);
 
 					//BORDS
-			plateformeGrp.add(bordHorizontalB);
-			plateformeGrp.add(bordHorizontalH);
-			plateformeGrp.add(bordVerticalG);
-			plateformeGrp.add(bordVerticalD);
+			for(var i = 0 ; i<bordures.length; i++){
+					plateformeGrp.add(bordures[i]);
+			}
 
 					//PLATEFORMES
 			plateformeGrp.add(plateforme_sol1);
