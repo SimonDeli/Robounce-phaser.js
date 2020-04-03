@@ -57,8 +57,8 @@ MyGame.StateLevel1.prototype = {
 				this.plateformeRebond2.angle = 90;
 
 				//BUMPER
-			bumper1 = new Bumper(game, 700, 0, "bumper", debug);
-				bumper1.body.y = this.plateforme_sol2.body.y-10;
+			this.bumper1 = levelService.createBumper(700, 0, "bumper", debug);
+				this.bumper1.body.y = this.plateforme_sol2.body.y-10;
 
 
 			levelComplete = new Bumper(game, game.world.width-20, game.world.height-190, "bumper", debug);
@@ -114,13 +114,10 @@ MyGame.StateLevel1.prototype = {
 			porteGrp.add(porteVe);
 
 					//BUMPER
-			bumperGrp.add(bumper1);
-
-
+			levelService.createBumperGroup(bumperGrp);
+			
 					//BORDS
-			for(var i = 0 ; i<levelService.bordures.length ; i++){
-				plateformeGrp.add(levelService.bordures[i]);
-			}
+			levelService.createBordureGroup(plateformeGrp);
 
 					//PLATEFORMES
 			levelService.createPlateformeGroup(plateformeGrp, false);
